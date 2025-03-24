@@ -1,5 +1,4 @@
-# Transformers---T5
-
+# Transformers --- T5
 # Text Summarization and Question Answering using Transformers
 
 ## 📌 Project Overview
@@ -19,30 +18,51 @@ This project implements **text summarization** and **question-answering (Q&A)** 
 - **Performed stemming and lemmatization** to standardize word forms.
 - **Split the text into chunks** to optimize summarization and retrieval.
 
+## 🔍 Methods and Models Used
+### **1️⃣ Embedding Models**
+- **SBERT (all-MiniLM-L6-V2)** - Used initially for sentence embeddings in the Q&A system.
+- **SBERT (all-mpnet-base-v2)** - Later adopted for improved retrieval accuracy.
+
+### **2️⃣ Search Models**
+- **Cosine Similarity** - First retrieval method, had limitations in accuracy.
+- **FAISS (Facebook AI Similarity Search)** - Used for faster and more precise semantic search.
+
+### **3️⃣ Transformer Models**
+- **T5-small** - Used for text summarization and early Q&A testing.
+- **Flan-T5-Base** - Final Q&A model that provided better context-aware answers.
+
 ## 📌 Implementation Details
 
 ### **Text Summarization**
-1. **Data Cleaning & Preprocessing:** The book text was cleaned using the above preprocessing steps.
-2. **Chunking Strategy:** The text was split into **293 meaningful chunks** for efficient summarization.
-3. **Model Selection:** We used the **T5-small** transformer model for text summarization.
-4. **Summarization Process:** Each chunk was passed through the **T5-small** model to generate summaries.
-5. **Storage of Summarized Data:** The generated summaries were saved in **summarized_text.txt** for later use in the Q&A system.
+1. **Data Cleaning & Preprocessing:**
+   - Removed unwanted sections and cleaned text.
+   - Tokenized sentences and applied necessary text transformations.
+2. **Chunking Strategy:**
+   - The book was split into **293 meaningful chunks** for better summarization.
+   - Overlapping chunks were used to preserve context.
+3. **Model Selection:**
+   - We selected **T5-small**, a pre-trained sequence-to-sequence transformer model.
+4. **Summarization Process:**
+   - Each chunk was fed into **T5-small** to generate a condensed summary.
+   - The model was fine-tuned to maintain key information.
+5. **Storage of Summarized Data:**
+   - The generated summaries were stored in **summarized_text.txt** for later retrieval in the Q&A model.
 
 ### **Question Answering System**
-1. **Using Summarized Data:** Instead of using raw text, we utilized the **summarized_text.txt** file for better retrieval and generation.
+1. **Using Summarized Data:**
+   - Instead of processing the full book, we used the **summarized_text.txt** file for efficient retrieval.
 2. **Embedding Models:**
-   - Initially used **SBERT (all-MiniLM-L6-V2)** to create embeddings for text retrieval.
-   - Later, switched to **SBERT (all-mpnet-base-v2)** for improved accuracy.
+   - First, we embedded the summarized text using **SBERT (all-MiniLM-L6-V2)**.
+   - Later, we switched to **SBERT (all-mpnet-base-v2)** for improved performance.
 3. **Search Models:**
-   - **Cosine Similarity** was tested first but had limitations in retrieval.
-   - Replaced with **FAISS (Facebook AI Similarity Search)** to enhance search speed and relevance.
-4. **Transformer Models for Q&A:**
-   - Initially used **T5-small** for generating answers.
-   - Upgraded to **Flan-T5-Base**, which provided more contextually accurate responses.
-5. **Retrieval + Answer Generation Pipeline:**
-   1. User query is embedded using **SBERT**.
-   2. **FAISS** retrieves the **top-k most relevant chunks**.
-   3. The **Flan-T5-Base** model generates an answer based on retrieved content.
+   - Initially, **Cosine Similarity** was used but had limited retrieval accuracy.
+   - We then implemented **FAISS**, a scalable nearest-neighbor search method.
+4. **Retrieval Process:**
+   - A user query is embedded using the same SBERT model.
+   - FAISS retrieves the **top-k most relevant chunks** based on similarity.
+5. **Answer Generation:**
+   - Initially, **T5-small** was used for answer generation.
+   - Finally, **Flan-T5-Base** was adopted, providing more detailed and accurate responses.
 
 ## 📊 Results
 Example Q&A system responses:
