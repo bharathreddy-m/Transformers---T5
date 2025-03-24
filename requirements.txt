@@ -1,0 +1,10 @@
+transformers==4.36.1  # Library for working with Transformer models like T5 and Flan-T5-Base
+sentence-transformers==2.2.2  # Used for generating sentence embeddings (SBERT models)
+faiss-cpu==1.7.4  # Efficient similarity search library for fast retrieval of text chunks
+numpy==1.23.5  # Fundamental package for numerical computing in Python
+pandas==1.5.3  # Data manipulation and processing library (used for handling text data)
+torch==2.1.0  # PyTorch framework for deep learning and transformer models
+tqdm==4.64.1  # Progress bar utility for tracking operations like model inference
+scikit-learn==1.2.2  # Machine learning library (used for similarity measures & preprocessing)
+nltk==3.8.1  # Natural Language Toolkit for text preprocessing (stopword removal, tokenization)
+regex==2023.6.3  # Regular expressions library for text cleaning and processing
